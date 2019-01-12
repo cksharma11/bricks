@@ -40,28 +40,52 @@ const createPaddle = function(paddle) {
   drawPaddle(paddle, paddleDiv);
 };
 
-const drawBall = function(ball, newBall) {
-  newBall.style.height = addPixelSuffix(ball.height);
-  newBall.style.width = addPixelSuffix(ball.width);
-  newBall.style.borderRadius = addPixelSuffix(ball.height);
+const drawBall = function(ball, ballDiv) {
+  ballDiv.style.height = addPixelSuffix(ball.height);
+  ballDiv.style.width = addPixelSuffix(ball.width);
+  ballDiv.style.borderRadius = addPixelSuffix(ball.height);
+  ballDiv.style.left = addPixelSuffix(ball.x);
+  ballDiv.style.bottom = addPixelSuffix(ball.y);
 };
 
-const createBall = function(ball) {
+const createBall = function(ball, velocity) {
   const screen = document.getElementById('screen');
-  const newBall = document.createElement('div');
-  drawBall(ball, newBall);
-  newBall.className = 'ball';
-  newBall.id = 'ball_1';
-  screen.appendChild(newBall);
+  const ballDiv = document.createElement('div');
+  drawBall(ball, ballDiv);
+  ballDiv.className = 'ball';
+  ballDiv.id = 'ball_1';
+  screen.appendChild(ballDiv);
+  moveBall(ball, ballDiv, velocity);
 };
 
-const initialisePaddle = function() {
+const moveBall = function(ball, ballDiv, velocity) {
+  let movement = setInterval(() => {
+    console.log(ball.x, ball.y);
+    if (ball.doesRightCollide()) {
+      velocity.moveHorizontal();
+    }
+    if (ball.doesTopCollide()) {
+      velocity.moveVertical();
+    }
+    if (ball.doesBottomCollide()) {
+      velocity.moveVertical();
+    }
+    if (ball.doesLeftCollide()) {
+      velocity.moveHorizontal();
+    }
+    ball.move(velocity.x, velocity.y);
+    drawBall(ball, ballDiv);
+  }, 5);
+};
+
+const initialiseGame = function() {
   const paddle = new Paddle(20, 100, 5, 430);
   const screen = new Screen(600, 960);
-  const ball = new Ball(20);
+  const ball = new Ball(40, 430, 25);
+  const velocity = new Velocity(2, 2);
   createScreen(screen);
   createPaddle(paddle);
-  createBall(ball);
+  createBall(ball, velocity);
 };
 
-window.onload = initialisePaddle;
+window.onload = initialiseGame;
