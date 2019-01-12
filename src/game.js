@@ -32,18 +32,23 @@ const drawPaddle = function(paddle, paddleDiv) {
 };
 
 const eventListner = function(paddle, paddleDiv) {
-  console.log(paddle.left > 800);
   if (event.key == 'ArrowRight' && paddle.left < 860) paddle.moveRight();
   if (event.key == 'ArrowLeft' && paddle.left > 0) paddle.moveLeft();
   drawPaddle(paddle, paddleDiv);
 };
 
-const createScreen = function(document) {
+const drawScreen = function(screen, mainScreen) {
+  mainScreen.style.height = addPixelSuffix(screen.height);
+  mainScreen.style.width = addPixelSuffix(screen.width);
+};
+
+const createScreen = function(screen) {
   const body = document.getElementById('body');
-  const screen = document.createElement('main');
-  screen.id = 'screen';
-  screen.tabIndex = '0';
-  body.appendChild(screen);
+  const mainScreen = document.createElement('main');
+  mainScreen.id = 'screen';
+  mainScreen.tabIndex = '0';
+  drawScreen(screen, mainScreen);
+  body.appendChild(mainScreen);
 };
 
 const createPaddle = function(paddle) {
@@ -61,7 +66,8 @@ const createPaddle = function(paddle) {
 
 const initialisePaddle = function() {
   const paddle = new Paddle(20, 100, 5, 430);
-  createScreen(document);
+  const screen = new Screen(600, 960);
+  createScreen(screen);
   createPaddle(paddle);
 };
 
