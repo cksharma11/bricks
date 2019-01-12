@@ -1,27 +1,3 @@
-class Paddle {
-  constructor(height, width, bottom, left) {
-    this.height = height;
-    this.width = width;
-    this.bottom = bottom;
-    this.left = left;
-  }
-
-  moveLeft() {
-    this.left -= 10;
-  }
-
-  moveRight() {
-    this.left += 10;
-  }
-}
-
-class Screen {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
-}
-
 const addPixelSuffix = value => value + 'px';
 
 const drawPaddle = function(paddle, paddleDiv) {
@@ -64,11 +40,28 @@ const createPaddle = function(paddle) {
   drawPaddle(paddle, paddleDiv);
 };
 
+const drawBall = function(ball, newBall) {
+  newBall.style.height = addPixelSuffix(ball.height);
+  newBall.style.width = addPixelSuffix(ball.width);
+  newBall.style.borderRadius = addPixelSuffix(ball.height);
+};
+
+const createBall = function(ball) {
+  const screen = document.getElementById('screen');
+  const newBall = document.createElement('div');
+  drawBall(ball, newBall);
+  newBall.className = 'ball';
+  newBall.id = 'ball_1';
+  screen.appendChild(newBall);
+};
+
 const initialisePaddle = function() {
   const paddle = new Paddle(20, 100, 5, 430);
   const screen = new Screen(600, 960);
+  const ball = new Ball(20);
   createScreen(screen);
   createPaddle(paddle);
+  createBall(ball);
 };
 
 window.onload = initialisePaddle;

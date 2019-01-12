@@ -8,3 +8,8 @@ main{
   position: absolute;
   background-color: black;
 }
+
+.ball{
+  position: absolute;
+  background-color: blue;
+}
