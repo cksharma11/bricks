@@ -15,6 +15,13 @@ class Paddle {
   }
 }
 
+class Screen {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+
 const addPixelSuffix = value => value + 'px';
 
 const drawPaddle = function(paddle, paddleDiv) {
