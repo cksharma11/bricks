@@ -8,7 +8,7 @@ const drawPaddle = function(paddle, paddleDiv) {
 };
 
 const eventListner = function(paddle, paddleDiv) {
-  if (event.key == 'ArrowRight' && paddle.left < 860) paddle.moveRight();
+  if (event.key == 'ArrowRight' && paddle.left < 760) paddle.moveRight();
   if (event.key == 'ArrowLeft' && paddle.left > 0) paddle.moveLeft();
   drawPaddle(paddle, paddleDiv);
 };
@@ -27,7 +27,7 @@ const createScreen = function(screen) {
   body.appendChild(mainScreen);
 };
 
-const createPaddle = function(paddle) {
+const createPaddle = function(paddle, ball, velocity) {
   const screen = document.getElementById('screen');
   const paddleDiv = document.createElement('div');
   paddleDiv.className = 'paddle';
@@ -38,6 +38,15 @@ const createPaddle = function(paddle) {
   screen.onkeydown = setEventListner;
   screen.focus();
   drawPaddle(paddle, paddleDiv);
+  manageCollisionWithPaddle(paddle, ball, velocity);
+};
+
+const manageCollisionWithPaddle = function(paddle, ball, velocity) {
+  setInterval(() => {
+    if (paddle.doesCollideWithBall(ball)) {
+      velocity.moveVertical();
+    }
+  }, 5);
 };
 
 const drawBall = function(ball, ballDiv) {
@@ -59,32 +68,25 @@ const createBall = function(ball, velocity) {
 };
 
 const moveBall = function(ball, ballDiv, velocity) {
-  let movement = setInterval(() => {
-    console.log(ball.x, ball.y);
-    if (ball.doesRightCollide()) {
-      velocity.moveHorizontal();
-    }
-    if (ball.doesTopCollide()) {
-      velocity.moveVertical();
-    }
-    if (ball.doesBottomCollide()) {
-      velocity.moveVertical();
-    }
-    if (ball.doesLeftCollide()) {
-      velocity.moveHorizontal();
-    }
+  setInterval(() => {
+    if (ball.doesTopCollide()) velocity.moveVertical();
+    if (ball.doesBottomCollide()) alert('MAR GYA');
+
+    if (ball.doesRightCollide()) velocity.moveHorizontal();
+    if (ball.doesLeftCollide()) velocity.moveHorizontal();
+
     ball.move(velocity.x, velocity.y);
     drawBall(ball, ballDiv);
   }, 5);
 };
 
 const initialiseGame = function() {
-  const paddle = new Paddle(20, 100, 5, 430);
+  const paddle = new Paddle(25, 200, 5, 430);
   const screen = new Screen(600, 960);
   const ball = new Ball(40, 430, 25);
   const velocity = new Velocity(2, 2);
   createScreen(screen);
-  createPaddle(paddle);
+  createPaddle(paddle, ball, velocity);
   createBall(ball, velocity);
 };
 

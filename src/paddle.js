@@ -13,4 +13,13 @@ class Paddle {
   moveRight() {
     this.left += 10;
   }
+
+  isBetween(number) {
+    return number < 0 && number > -200;
+  }
+
+  doesCollideWithBall(ball) {
+    const difference = this.left - ball.x;
+    return this.isBetween(difference) && ball.y < 8;
+  }
 }

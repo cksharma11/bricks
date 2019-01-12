@@ -2,11 +2,14 @@ main{
   margin: auto auto;
   border:1px solid black; 
   position: relative;
+  background: rgb(38, 99, 83);
 }
 
 .paddle{
   position: absolute;
-  background-color: black;
+  background-color: orangered;
+  border-radius: 5px;
+  box-shadow: 3px 3px;
 }
 
 .ball{
