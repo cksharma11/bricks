@@ -33,7 +33,6 @@ const createPaddle = function(paddle, ball, velocity) {
   paddleDiv.className = 'paddle';
   paddleDiv.id = 'paddle_1';
   screen.appendChild(paddleDiv);
-  drawPaddle(paddle, paddleDiv);
   const setEventListner = eventListner.bind(null, paddle, paddleDiv);
   screen.onkeydown = setEventListner;
   screen.focus();
@@ -70,7 +69,7 @@ const createBall = function(ball, velocity) {
 const moveBall = function(ball, ballDiv, velocity) {
   setInterval(() => {
     if (ball.doesTopCollide()) velocity.moveVertical();
-    if (ball.doesBottomCollide()) alert('MAR GYA');
+    if (ball.doesBottomCollide()) alert('Touched Bottom');
 
     if (ball.doesRightCollide()) velocity.moveHorizontal();
     if (ball.doesLeftCollide()) velocity.moveHorizontal();

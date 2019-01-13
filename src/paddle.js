@@ -15,11 +15,11 @@ class Paddle {
   }
 
   isBetween(number) {
-    return number < 0 && number > -200;
+    return number > 0 && number < 200;
   }
 
   doesCollideWithBall(ball) {
-    const difference = this.left - ball.x;
+    const difference = ball.x - this.left;
     return this.isBetween(difference) && ball.y < 8;
   }
 }
