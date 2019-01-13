@@ -40,14 +40,6 @@ const createPaddle = function(paddle) {
   screen.focus();
 };
 
-const manageCollisionWithPaddle = function(paddle, ball, velocity) {
-  setInterval(() => {
-    if (paddle.doesCollideWithBall(ball)) {
-      velocity.moveVertical();
-    }
-  }, 5);
-};
-
 const drawBall = function(ball) {
   const ballDiv = document.getElementById('ball_1');
   ballDiv.style.height = addPixelSuffix(ball.height);
@@ -66,15 +58,17 @@ const createBall = function(ball) {
 };
 
 const moveBall = function(ball, velocity) {
-  setInterval(() => {
-    if (ball.doesTopCollide()) velocity.moveVertical();
-    if (ball.doesBottomCollide()) velocity.moveVertical();
-    if (ball.doesRightCollide()) velocity.moveHorizontal();
-    if (ball.doesLeftCollide()) velocity.moveHorizontal();
+  if (ball.doesTopCollide()) velocity.moveVertical();
+  if (ball.doesBottomCollide()) alert('GAME OVER');
+  if (ball.doesRightCollide()) velocity.moveHorizontal();
+  if (ball.doesLeftCollide()) velocity.moveHorizontal();
 
-    ball.move(velocity.x, velocity.y);
-    drawBall(ball);
-  }, 5);
+  ball.move(velocity);
+  drawBall(ball);
+};
+
+const manageCollisionWithPaddle = function(paddle, ball, velocity) {
+  if (paddle.doesCollideWithBall(ball)) velocity.moveVertical();
 };
 
 const initialiseGame = function() {
@@ -88,8 +82,8 @@ const initialiseGame = function() {
   drawScreen(screen);
   drawPaddle(paddle);
   drawBall(ball);
-  moveBall(ball, velocity);
-  manageCollisionWithPaddle(paddle, ball, velocity);
+  setInterval(() => moveBall(ball, velocity), 5);
+  setInterval(() => manageCollisionWithPaddle(paddle, ball, velocity), 5);
 };
 
 window.onload = initialiseGame;

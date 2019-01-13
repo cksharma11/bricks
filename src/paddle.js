@@ -20,6 +20,6 @@ class Paddle {
 
   doesCollideWithBall(ball) {
     const difference = ball.x - this.left;
-    return this.isBetween(difference) && ball.y < 8;
+    return this.isBetween(difference) && ball.y < 25;
   }
 }

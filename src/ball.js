@@ -5,9 +5,9 @@ class Ball {
     this.x = x;
     this.y = y;
   }
-  move(x, y) {
-    this.x += x;
-    this.y += y;
+  move(velocity) {
+    this.x += velocity.x;
+    this.y += velocity.y;
   }
 
   doesRightCollide() {
