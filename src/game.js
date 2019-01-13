@@ -1,19 +1,14 @@
 const addPixelSuffix = value => value + 'px';
+const getMainScreen = document => document.getElementById('screen');
 
-const drawPaddle = function(paddle, paddleDiv) {
-  paddleDiv.style.width = addPixelSuffix(paddle.width);
-  paddleDiv.style.height = addPixelSuffix(paddle.height);
-  paddleDiv.style.bottom = addPixelSuffix(paddle.bottom);
-  paddleDiv.style.left = addPixelSuffix(paddle.left);
-};
-
-const eventListner = function(paddle, paddleDiv) {
+const eventListner = function(paddle) {
   if (event.key == 'ArrowRight' && paddle.left < 760) paddle.moveRight();
   if (event.key == 'ArrowLeft' && paddle.left > 0) paddle.moveLeft();
-  drawPaddle(paddle, paddleDiv);
+  drawPaddle(paddle);
 };
 
-const drawScreen = function(screen, mainScreen) {
+const drawScreen = function(screen) {
+  const mainScreen = document.getElementById('screen');
   mainScreen.style.height = addPixelSuffix(screen.height);
   mainScreen.style.width = addPixelSuffix(screen.width);
 };
@@ -23,12 +18,19 @@ const createScreen = function(screen) {
   const mainScreen = document.createElement('main');
   mainScreen.id = 'screen';
   mainScreen.tabIndex = '0';
-  drawScreen(screen, mainScreen);
   body.appendChild(mainScreen);
 };
 
-const createPaddle = function(paddle, ball, velocity) {
-  const screen = document.getElementById('screen');
+const drawPaddle = function(paddle) {
+  const paddleDiv = document.getElementById('paddle_1');
+  paddleDiv.style.width = addPixelSuffix(paddle.width);
+  paddleDiv.style.height = addPixelSuffix(paddle.height);
+  paddleDiv.style.bottom = addPixelSuffix(paddle.bottom);
+  paddleDiv.style.left = addPixelSuffix(paddle.left);
+};
+
+const createPaddle = function(paddle) {
+  const screen = getMainScreen(document);
   const paddleDiv = document.createElement('div');
   paddleDiv.className = 'paddle';
   paddleDiv.id = 'paddle_1';
@@ -36,8 +38,6 @@ const createPaddle = function(paddle, ball, velocity) {
   const setEventListner = eventListner.bind(null, paddle, paddleDiv);
   screen.onkeydown = setEventListner;
   screen.focus();
-  drawPaddle(paddle, paddleDiv);
-  manageCollisionWithPaddle(paddle, ball, velocity);
 };
 
 const manageCollisionWithPaddle = function(paddle, ball, velocity) {
@@ -48,7 +48,8 @@ const manageCollisionWithPaddle = function(paddle, ball, velocity) {
   }, 5);
 };
 
-const drawBall = function(ball, ballDiv) {
+const drawBall = function(ball) {
+  const ballDiv = document.getElementById('ball_1');
   ballDiv.style.height = addPixelSuffix(ball.height);
   ballDiv.style.width = addPixelSuffix(ball.width);
   ballDiv.style.borderRadius = addPixelSuffix(ball.height);
@@ -56,26 +57,23 @@ const drawBall = function(ball, ballDiv) {
   ballDiv.style.bottom = addPixelSuffix(ball.y);
 };
 
-const createBall = function(ball, velocity) {
-  const screen = document.getElementById('screen');
+const createBall = function(ball) {
+  const screen = getMainScreen(document);
   const ballDiv = document.createElement('div');
-  drawBall(ball, ballDiv);
   ballDiv.className = 'ball';
   ballDiv.id = 'ball_1';
   screen.appendChild(ballDiv);
-  moveBall(ball, ballDiv, velocity);
 };
 
-const moveBall = function(ball, ballDiv, velocity) {
+const moveBall = function(ball, velocity) {
   setInterval(() => {
     if (ball.doesTopCollide()) velocity.moveVertical();
-    if (ball.doesBottomCollide()) alert('Touched Bottom');
-
+    if (ball.doesBottomCollide()) velocity.moveVertical();
     if (ball.doesRightCollide()) velocity.moveHorizontal();
     if (ball.doesLeftCollide()) velocity.moveHorizontal();
 
     ball.move(velocity.x, velocity.y);
-    drawBall(ball, ballDiv);
+    drawBall(ball);
   }, 5);
 };
 
@@ -85,8 +83,13 @@ const initialiseGame = function() {
   const ball = new Ball(40, 430, 25);
   const velocity = new Velocity(2, 2);
   createScreen(screen);
-  createPaddle(paddle, ball, velocity);
-  createBall(ball, velocity);
+  createPaddle(paddle);
+  createBall(ball);
+  drawScreen(screen);
+  drawPaddle(paddle);
+  drawBall(ball);
+  moveBall(ball, velocity);
+  manageCollisionWithPaddle(paddle, ball, velocity);
 };
 
 window.onload = initialiseGame;
