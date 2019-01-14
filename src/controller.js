@@ -45,8 +45,8 @@ const drawBall = function(ball) {
   ballDiv.style.height = addPixelSuffix(ball.height);
   ballDiv.style.width = addPixelSuffix(ball.width);
   ballDiv.style.borderRadius = addPixelSuffix(ball.height);
-  ballDiv.style.left = addPixelSuffix(ball.x);
-  ballDiv.style.bottom = addPixelSuffix(ball.y);
+  ballDiv.style.left = addPixelSuffix(ball.getPositionX());
+  ballDiv.style.bottom = addPixelSuffix(ball.getPositionY());
 };
 
 const createBall = function() {

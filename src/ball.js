@@ -1,17 +1,33 @@
 class Ball {
-  constructor(radius, x, y, velocity) {
+  constructor(radius, positionX, positionY, velocity) {
     this.height = radius;
     this.width = radius;
-    this.x = x;
-    this.y = y;
+    this.positionX = positionX;
+    this.positionY = positionY;
     this.velocity = velocity;
   }
   move() {
-    this.x += this.velocity.x;
-    this.y += this.velocity.y;
+    this.positionX += this.velocity.x;
+    this.positionY += this.velocity.y;
   }
 
   setVelocity(velocity) {
     this.velocity = velocity;
+  }
+
+  getVelocityX() {
+    return this.velocity.x;
+  }
+
+  getVelocityY() {
+    return this.velocity.y;
+  }
+
+  getPositionX() {
+    return this.positionX;
+  }
+
+  getPositionY() {
+    return this.positionY;
   }
 }

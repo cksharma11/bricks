@@ -19,12 +19,12 @@ class Paddle {
   }
 
   doesCollideWith(ball) {
-    const difference = ball.x - this.left;
-    return this.isWithinRange(difference) && ball.y < 25;
+    const difference = ball.getPositionX() - this.left;
+    return this.isWithinRange(difference) && ball.getPositionY() < 25;
   }
 
   manageCollisionWith(ball) {
-    const velocity = new Velocity(ball.velocity.x, ball.velocity.y);
+    const velocity = new Velocity(ball.getVelocityX(), ball.getVelocityY());
     if (this.doesCollideWith(ball)) velocity.negateY();
     return velocity;
   }

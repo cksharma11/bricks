@@ -5,10 +5,10 @@ class Screen {
   }
 
   doesRightOrLeftCollide(ball) {
-    return ball.x == 920 || ball.x == 0;
+    return ball.getPositionX() == 920 || ball.getPositionX() == 0;
   }
   doesTopOrBottomCollide(ball) {
-    return ball.y == 559 || ball.y == 1;
+    return ball.getPositionY() == 559 || ball.getPositionY() == 1;
   }
 
   collide(ball, velocity) {
