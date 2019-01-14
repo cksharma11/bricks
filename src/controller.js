@@ -1,9 +1,11 @@
+const ARROW_RIGHT = 'ArrowRight';
+const ARROW_LEFT = 'ArrowLeft';
 const addPixelSuffix = value => value + 'px';
 const getMainScreen = document => document.getElementById('screen');
 
 const eventListner = function(paddle) {
-  if (event.key == 'ArrowRight') paddle.moveRight();
-  if (event.key == 'ArrowLeft') paddle.moveLeft();
+  if (event.key == ARROW_RIGHT) paddle.moveRight();
+  if (event.key == ARROW_LEFT) paddle.moveLeft();
   drawPaddle(paddle);
 };
 
@@ -35,9 +37,6 @@ const createPaddle = function(paddle) {
   paddleDiv.className = 'paddle';
   paddleDiv.id = 'paddle_1';
   screen.appendChild(paddleDiv);
-  const setEventListner = eventListner.bind(null, paddle, paddleDiv);
-  screen.onkeydown = setEventListner;
-  screen.focus();
 };
 
 const drawBall = function(ball) {
