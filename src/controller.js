@@ -31,7 +31,7 @@ const drawPaddle = function(paddle) {
   paddleDiv.style.left = addPixelSuffix(paddle.left);
 };
 
-const createPaddle = function(paddle) {
+const createPaddle = function() {
   const screen = getMainScreen(document);
   const paddleDiv = document.createElement('div');
   paddleDiv.className = 'paddle';
@@ -63,8 +63,8 @@ const moveBall = function(game) {
 
 const createGame = function(game) {
   createScreen();
+  createPaddle();
   createBall();
-  createPaddle(game.paddle);
   drawScreen(game.screen);
   drawPaddle(game.paddle);
   drawBall(game.ball);
