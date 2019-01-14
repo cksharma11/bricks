@@ -19,7 +19,7 @@ main{
 
 .brick{
   position: absolute;
-  background: red;
+  background: wheat;
   border-radius: 5px;
   margin: 2px;
 }

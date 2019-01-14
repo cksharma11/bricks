@@ -1,8 +1,9 @@
 class Game {
-  constructor(screen, paddle, ball) {
+  constructor(screen, paddle, ball, brick) {
     this.screen = screen;
     this.paddle = paddle;
     this.ball = ball;
+    this.brick = brick;
   }
 
   checkCollision() {

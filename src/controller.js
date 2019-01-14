@@ -56,6 +56,44 @@ const createBall = function() {
   screen.appendChild(ballDiv);
 };
 
+const appendBricks = function(positionX, positionY, id) {
+  const screen = getMainScreen(document);
+  const brick = document.createElement('div');
+  brick.className = 'brick';
+  brick.id = id;
+  brick.positionX = positionX;
+  brick.positionY = positionY;
+  screen.appendChild(brick);
+};
+
+const createBricksAttributes = function(bricks, positionX, positionY, id) {
+  bricks.forEach(() => {
+    if (id % 8 == 0) {
+      positionX = 0;
+      positionY += 25;
+    }
+    appendBricks(positionX, positionY, id++);
+    positionX = positionX + 120;
+  });
+};
+
+const createBrick = function() {
+  const bricks = new Array(40).fill(undefined);
+  createBricksAttributes(bricks, 30, -25, 0);
+};
+
+const drawBrick = function(brick) {
+  const bricks = new Array(40).fill(undefined);
+  let id = 0;
+  bricks.forEach(() => {
+    const brickDiv = document.getElementById(id++);
+    brickDiv.style.width = addPixelSuffix(brick.width);
+    brickDiv.style.height = addPixelSuffix(brick.height);
+    brickDiv.style.left = addPixelSuffix(brickDiv.positionX);
+    brickDiv.style.top = addPixelSuffix(brickDiv.positionY);
+  });
+};
+
 const moveBall = function(game) {
   game.updateState();
   drawBall(game.ball);
@@ -65,9 +103,11 @@ const createGame = function(game) {
   createScreen();
   createPaddle();
   createBall();
+  createBrick();
   drawScreen(game.screen);
   drawPaddle(game.paddle);
   drawBall(game.ball);
+  drawBrick(game.brick);
 };
 
 const startGame = function(game) {
@@ -82,7 +122,8 @@ const initialiseGame = function() {
   const screen = new Screen(600, 960);
   const velocity = new Velocity(2, 2);
   const ball = new Ball(40, 430, 25, velocity);
-  const game = new Game(screen, paddle, ball);
+  const brick = new Brick(20, 110, 0, 0);
+  const game = new Game(screen, paddle, ball, brick);
   createGame(game);
   startGame(game);
 };
