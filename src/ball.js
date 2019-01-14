@@ -1,25 +1,17 @@
 class Ball {
-  constructor(radius, x, y) {
+  constructor(radius, x, y, velocity) {
     this.height = radius;
     this.width = radius;
     this.x = x;
     this.y = y;
+    this.velocity = velocity;
   }
-  move(velocity) {
-    this.x += velocity.x;
-    this.y += velocity.y;
+  move() {
+    this.x += this.velocity.x;
+    this.y += this.velocity.y;
   }
 
-  doesRightCollide() {
-    return this.x == 920;
-  }
-  doesTopCollide() {
-    return this.y == 559;
-  }
-  doesBottomCollide() {
-    return this.y == 1;
-  }
-  doesLeftCollide() {
-    return this.x == 0;
+  setVelocity(velocity) {
+    this.velocity = velocity;
   }
 }

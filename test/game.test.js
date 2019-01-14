@@ -20,14 +20,14 @@ describe('Paddle', () => {
   it('should return true when difference between ball.x and paddle.x is between 200 and ball height is less then 25', () => {
     const paddle = new Paddle(10, 100, 100, 100);
     const ball = new Ball(10, 200, 10);
-    expect(paddle.doesCollideWithBall(ball)).to.equals(true);
+    expect(paddle.doesCollideWith(ball)).to.equals(true);
   });
 
   it('should return false when difference between ball.x and paddle.x is not between 200 and ball height is less then 25', () => {
     const paddle = new Paddle(10, 100, 100, 100);
     const ball = new Ball(10, 100, 10);
-    expect(paddle.doesCollideWithBall(ball)).to.equals(false);
-  }); 
+    expect(paddle.doesCollideWith(ball)).to.equals(false);
+  });
 });
 
 describe('Ball', () => {

@@ -18,8 +18,14 @@ class Paddle {
     return number > 0 && number < 200;
   }
 
-  doesCollideWithBall(ball) {
+  doesCollideWith(ball) {
     const difference = ball.x - this.left;
     return this.isBetween(difference) && ball.y < 25;
+  }
+
+  manageCollisionWith(ball) {
+    const velocity = new Velocity(ball.velocity.x, ball.velocity.y);
+    if (this.doesCollideWith(ball)) velocity.negateY();
+    return velocity;
   }
 }

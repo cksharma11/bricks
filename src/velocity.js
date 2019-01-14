@@ -4,10 +4,10 @@ class Velocity {
     this.y = y;
   }
 
-  moveHorizontal() {
+  negateX() {
     this.x *= -1;
   }
-  moveVertical() {
+  negateY() {
     this.y *= -1;
   }
 }

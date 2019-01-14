@@ -16,3 +16,15 @@ main{
   position: absolute;
   background-color: blue;
 }
+
+.brick{
+  position: absolute;
+  background: red;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.brickContainer{
+  display: flex;
+  position: absolute;
+}
