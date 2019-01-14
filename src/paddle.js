@@ -7,20 +7,20 @@ class Paddle {
   }
 
   moveLeft() {
-    if (this.left > 0) this.left -= 10;
+    this.left = Math.max(0, this.left - 10);
   }
 
   moveRight() {
-    if (this.left < 760) this.left += 10;
+    this.left = Math.min(760, this.left + 10);
   }
 
-  isBetween(number) {
+  isWithinRange(number) {
     return number > 0 && number < 200;
   }
 
   doesCollideWith(ball) {
     const difference = ball.x - this.left;
-    return this.isBetween(difference) && ball.y < 25;
+    return this.isWithinRange(difference) && ball.y < 25;
   }
 
   manageCollisionWith(ball) {

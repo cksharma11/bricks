@@ -56,22 +56,22 @@ describe('Ball', () => {
 describe('Velocity', () => {
   it('should make velocity.x nagetive', () => {
     const velocity = new Velocity(10, 10);
-    velocity.moveHorizontal();
+    velocity.negateX();
     expect(velocity.x).to.equals(-10);
   });
   it('should make velocity.y nagetive', () => {
     const velocity = new Velocity(10, 10);
-    velocity.moveVertical();
+    velocity.negateY();
     expect(velocity.y).to.equals(-10);
   });
   it('should make velocity.x nagetive to positive value', () => {
     const velocity = new Velocity(-10, -10);
-    velocity.moveHorizontal();
+    velocity.negateX();
     expect(velocity.x).to.equals(10);
   });
   it('should make velocity.y nagetive to positive value', () => {
     const velocity = new Velocity(-10, -10);
-    velocity.moveVertical();
+    velocity.negateY();
     expect(velocity.y).to.equals(10);
   });
 });
