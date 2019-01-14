@@ -62,22 +62,20 @@ const moveBall = function(game) {
   drawBall(game.ball);
 };
 
-const createElements = function(screen, paddle, ball) {
+const createGame = function(game) {
   createScreen();
-  createPaddle(paddle);
   createBall();
-  drawScreen(screen);
-  drawPaddle(paddle);
-  drawBall(ball);
+  createPaddle(game.paddle);
+  drawScreen(game.screen);
+  drawPaddle(game.paddle);
+  drawBall(game.ball);
 };
 
-const startGame = function(game, paddle) {
+const startGame = function(game) {
   const mainDiv = getMainScreen(document);
-  mainDiv.onkeydown = eventListner.bind(null, paddle);
+  mainDiv.onkeydown = eventListner.bind(null, game.paddle);
   mainDiv.focus();
-  setInterval(() => {
-    moveBall(game);
-  }, 5);
+  setInterval(moveBall.bind(null, game), 5);
 };
 
 const initialiseGame = function() {
@@ -86,8 +84,8 @@ const initialiseGame = function() {
   const velocity = new Velocity(2, 2);
   const ball = new Ball(40, 430, 25, velocity);
   const game = new Game(screen, paddle, ball);
-  createElements(screen, paddle, ball);
-  startGame(game, paddle);
+  createGame(game);
+  startGame(game);
 };
 
 window.onload = initialiseGame;
