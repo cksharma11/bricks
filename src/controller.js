@@ -2,8 +2,8 @@ const addPixelSuffix = value => value + 'px';
 const getMainScreen = document => document.getElementById('screen');
 
 const eventListner = function(paddle) {
-  if (event.key == 'ArrowRight' && paddle.left < 760) paddle.moveRight();
-  if (event.key == 'ArrowLeft' && paddle.left > 0) paddle.moveLeft();
+  if (event.key == 'ArrowRight') paddle.moveRight();
+  if (event.key == 'ArrowLeft') paddle.moveLeft();
   drawPaddle(paddle);
 };
 

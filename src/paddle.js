@@ -7,11 +7,11 @@ class Paddle {
   }
 
   moveLeft() {
-    this.left -= 10;
+    if (this.left > 0) this.left -= 10;
   }
 
   moveRight() {
-    this.left += 10;
+    if (this.left < 760) this.left += 10;
   }
 
   isBetween(number) {
