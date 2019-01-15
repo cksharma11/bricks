@@ -68,33 +68,32 @@ const appendBricks = function(positionX, positionY, id) {
   screen.appendChild(brick);
 };
 
-const setBricksPosition = function(bricks, positionX, positionY, id) {
-  bricks.forEach(() => {
-    if (id % NUMBER_OF_BRICKS_IN_ROW == 0) {
+const setBricksPosition = function(bricks, positionX, positionY) {
+  for (const ID in bricks) {
+    if (ID % NUMBER_OF_BRICKS_IN_ROW == 0) {
       positionX = 0;
-      positionY -= 25;
+      positionY = positionY - 25;
     }
-    appendBricks(positionX, positionY, id++);
+    appendBricks(positionX, positionY, ID);
     positionX = positionX + 120;
-  });
+  }
 };
 
 const createBrick = function() {
   const bricks = new Array(TOTAL_BRIKCS).fill(undefined);
-  setBricksPosition(bricks, 30, 600, 0);
+  setBricksPosition(bricks, 30, 600);
 };
 
 const drawBrick = function(brick) {
   const bricks = new Array(TOTAL_BRIKCS).fill(undefined);
-  let id = 0;
-  bricks.forEach(() => {
-    const brickDiv = document.getElementById(id++);
+  for (const ID in bricks) {
+    const brickDiv = document.getElementById(ID);
     brickDiv.style.width = addPixelSuffix(brick.width);
     brickDiv.style.height = addPixelSuffix(brick.height);
     brickDiv.style.left = addPixelSuffix(brickDiv.positionX);
     brickDiv.style.bottom = addPixelSuffix(brickDiv.positionY);
-    brick.storeBricks({ id, x: brickDiv.positionX, y: brickDiv.positionY });
-  });
+    brick.storeBricks({ ID, X: brickDiv.positionX, Y: brickDiv.positionY });
+  }
 };
 
 const moveBall = function(game) {
