@@ -1,5 +1,7 @@
 const ARROW_RIGHT = 'ArrowRight';
 const ARROW_LEFT = 'ArrowLeft';
+const TOTAL_BRIKCS = 40;
+const NUMBER_OF_BRICKS_IN_ROW = 8;
 const addPixelSuffix = value => value + 'px';
 const getMainScreen = document => document.getElementById('screen');
 
@@ -66,11 +68,11 @@ const appendBricks = function(positionX, positionY, id) {
   screen.appendChild(brick);
 };
 
-const createBricksAttributes = function(bricks, positionX, positionY, id) {
+const setBricksPosition = function(bricks, positionX, positionY, id) {
   bricks.forEach(() => {
-    if (id % 8 == 0) {
+    if (id % NUMBER_OF_BRICKS_IN_ROW == 0) {
       positionX = 0;
-      positionY += 25;
+      positionY -= 25;
     }
     appendBricks(positionX, positionY, id++);
     positionX = positionX + 120;
@@ -78,19 +80,20 @@ const createBricksAttributes = function(bricks, positionX, positionY, id) {
 };
 
 const createBrick = function() {
-  const bricks = new Array(40).fill(undefined);
-  createBricksAttributes(bricks, 30, -25, 0);
+  const bricks = new Array(TOTAL_BRIKCS).fill(undefined);
+  setBricksPosition(bricks, 30, 600, 0);
 };
 
 const drawBrick = function(brick) {
-  const bricks = new Array(40).fill(undefined);
+  const bricks = new Array(TOTAL_BRIKCS).fill(undefined);
   let id = 0;
   bricks.forEach(() => {
     const brickDiv = document.getElementById(id++);
     brickDiv.style.width = addPixelSuffix(brick.width);
     brickDiv.style.height = addPixelSuffix(brick.height);
     brickDiv.style.left = addPixelSuffix(brickDiv.positionX);
-    brickDiv.style.top = addPixelSuffix(brickDiv.positionY);
+    brickDiv.style.bottom = addPixelSuffix(brickDiv.positionY);
+    brick.storeBricks({ id, x: brickDiv.positionX, y: brickDiv.positionY });
   });
 };
 
