@@ -24,9 +24,9 @@ class Paddle {
     return this.isWithinRange(difference) && ball.getPositionY() < this.height;
   }
 
-  manageCollisionWith(ball) {
-    const velocity = new Velocity(ball.getVelocityX(), ball.getVelocityY());
-    if (this.doesCollideWith(ball)) velocity.negateY();
-    return velocity;
+  manageCollisionWith(ball, velocity) {
+    const newVelocity = new Velocity(velocity.x, velocity.y);
+    if (this.doesCollideWith(ball)) newVelocity.negateY();
+    return newVelocity;
   }
 }

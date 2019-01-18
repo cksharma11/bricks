@@ -11,7 +11,7 @@ class Screen {
     return ball.getPositionY() == 559 || ball.getPositionY() == 1;
   }
 
-  collide(ball, velocity) {
+  manageCollisionWith(ball, velocity) {
     const newVelocity = new Velocity(velocity.x, velocity.y);
     if (this.doesTopOrBottomCollide(ball)) newVelocity.negateY();
     if (this.doesRightOrLeftCollide(ball)) newVelocity.negateX();

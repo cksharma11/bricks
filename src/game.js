@@ -7,9 +7,13 @@ class Game {
   }
 
   checkCollision() {
-    let velocity = this.paddle.manageCollisionWith(this.ball);
-    velocity = this.brick.manageCollisionWith(this.ball);
-    velocity = this.screen.collide(this.ball, velocity);
+    let velocity = this.paddle.manageCollisionWith(
+      this.ball,
+      this.ball.velocity
+    );
+
+    velocity = this.brick.manageCollisionWith(this.ball, velocity);
+    velocity = this.screen.manageCollisionWith(this.ball, velocity);
     return velocity;
   }
 

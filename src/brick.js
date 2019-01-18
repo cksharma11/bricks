@@ -24,16 +24,16 @@ class Brick {
     return this.checkCollision(differenceInPositionX, differenceInPositionY);
   }
 
-  manageCollisionWith(ball) {
-    const velocity = new Velocity(ball.getVelocityX(), ball.getVelocityY());
+  manageCollisionWith(ball, velocity) {
+    const newVelocity = new Velocity(velocity.x, velocity.y);
     const doesCollide = this.brickStore.some(brick => {
       if (!this.doesCollideWith(brick, ball)) return false;
       document.getElementById(brick.ID).remove();
       delete this.brickStore[brick.ID];
       return true;
     });
-    if (doesCollide) velocity.negateY();
+    if (doesCollide) newVelocity.negateY();
 
-    return velocity;
+    return newVelocity;
   }
 }
