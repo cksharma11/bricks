@@ -102,7 +102,7 @@ const displayScore = function(score) {
 };
 
 const displayRemainingLifes = function(lifes) {
-  const lifesCount = document.getElementById('lives');
+  const lifesCount = document.getElementById('Lifes');
   lifesCount.innerText = lifes;
 };
 
@@ -116,7 +116,7 @@ const checkWinCondition = function(score) {
 const checkLosingCondition = function(lifes, score) {
   if (lifes == 0) {
     const mainScreen = getMainScreen(document);
-    mainScreen.innerText = `Yose Lose!\nFinal Score : ${score}`;
+    mainScreen.innerText = `You Lose!\nFinal Score : ${score}`;
   }
 };
 

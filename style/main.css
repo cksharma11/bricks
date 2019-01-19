@@ -26,6 +26,7 @@ main {
 }
 
 .scoreCard {
+  color: rgb(9, 49, 24);
   display: flex;
   margin-top: 20px;
   text-align: center;
