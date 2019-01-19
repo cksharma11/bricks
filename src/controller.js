@@ -102,31 +102,33 @@ const displayScore = function(score) {
 };
 
 const displayRemainingLifes = function(lifes) {
-  const lifesCount = document.getElementById('Lifes');
+  const lifesCount = document.getElementById('lives');
   lifesCount.innerText = lifes;
 };
 
-const checkWinCondition = function(score) {
+const checkWinCondition = function(score, gameID) {
   if (score == 40) {
     const mainScreen = getMainScreen(document);
     mainScreen.innerText = `You Won!\nFinal Score : ${score}`;
+    clearInterval(gameID);
   }
 };
 
-const checkLosingCondition = function(lifes, score) {
+const checkLosingCondition = function(lifes, score, gameID) {
   if (lifes == 0) {
     const mainScreen = getMainScreen(document);
     mainScreen.innerText = `You Lose!\nFinal Score : ${score}`;
+    clearInterval(gameID);
   }
 };
 
-const moveBall = function(game) {
+const moveBall = function(game, gameID) {
   game.updateState();
   drawBall(game.ball);
   const score = game.score();
   const lifes = game.lifesCount();
-  checkWinCondition(score);
-  checkLosingCondition(lifes, score);
+  checkWinCondition(score, gameID);
+  checkLosingCondition(lifes, score, gameID);
   displayScore(score);
   displayRemainingLifes(lifes);
 };
@@ -146,7 +148,9 @@ const startGame = function(game) {
   const mainDiv = getMainScreen(document);
   mainDiv.onkeydown = eventListner.bind(null, game.paddle);
   mainDiv.focus();
-  setInterval(moveBall.bind(null, game), 5);
+  const gameID = setInterval(() => {
+    moveBall.bind(null, game, gameID)();
+  }, 5);
 };
 
 const initialiseGame = function() {
