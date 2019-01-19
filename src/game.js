@@ -10,6 +10,10 @@ class Game {
     return this.brick.collideCount;
   }
 
+  lifesCount() {
+    return this.screen.lifeCount;
+  }
+
   checkCollision() {
     let velocity = this.paddle.manageCollisionWith(
       this.ball,

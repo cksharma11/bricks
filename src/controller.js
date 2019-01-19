@@ -101,10 +101,16 @@ const displayScore = function(score) {
   scoreCard.innerText = score;
 };
 
+const displayRemainingLifes = function(lifes) {
+  const lifesCount = document.getElementById('lives');
+  lifesCount.innerText = lifes;
+};
+
 const moveBall = function(game) {
   game.updateState();
   drawBall(game.ball);
   displayScore(game.score());
+  displayRemainingLifes(game.lifesCount());
 };
 
 const createGame = function(game) {
