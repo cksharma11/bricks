@@ -106,11 +106,29 @@ const displayRemainingLifes = function(lifes) {
   lifesCount.innerText = lifes;
 };
 
+const checkWinCondition = function(score) {
+  if (score == 40) {
+    const mainScreen = getMainScreen(document);
+    mainScreen.innerText = 'You Won!';
+  }
+};
+
+const checkLosingCondition = function(lifes) {
+  if (lifes == 0) {
+    const mainScreen = getMainScreen(document);
+    mainScreen.innerText = 'Yose Lose!';
+  }
+};
+
 const moveBall = function(game) {
   game.updateState();
   drawBall(game.ball);
-  displayScore(game.score());
-  displayRemainingLifes(game.lifesCount());
+  const score = game.score();
+  const lifes = game.lifesCount();
+  checkWinCondition(score);
+  checkLosingCondition(lifes);
+  displayScore(score);
+  displayRemainingLifes(lifes);
 };
 
 const createGame = function(game) {
