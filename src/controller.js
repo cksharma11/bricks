@@ -109,14 +109,14 @@ const displayRemainingLifes = function(lifes) {
 const checkWinCondition = function(score) {
   if (score == 40) {
     const mainScreen = getMainScreen(document);
-    mainScreen.innerText = 'You Won!';
+    mainScreen.innerText = `You Won!\nFinal Score : ${score}`;
   }
 };
 
-const checkLosingCondition = function(lifes) {
+const checkLosingCondition = function(lifes, score) {
   if (lifes == 0) {
     const mainScreen = getMainScreen(document);
-    mainScreen.innerText = 'Yose Lose!';
+    mainScreen.innerText = `Yose Lose!\nFinal Score : ${score}`;
   }
 };
 
@@ -126,7 +126,7 @@ const moveBall = function(game) {
   const score = game.score();
   const lifes = game.lifesCount();
   checkWinCondition(score);
-  checkLosingCondition(lifes);
+  checkLosingCondition(lifes, score);
   displayScore(score);
   displayRemainingLifes(lifes);
 };

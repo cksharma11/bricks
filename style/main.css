@@ -1,25 +1,37 @@
-main{
+main {
+  font-size: 100px;
   margin: auto auto;
-  border:1px solid black; 
+  border: 1px solid black;
   position: relative;
   background: rgb(38, 99, 83);
 }
 
-.paddle{
+.paddle {
   position: absolute;
   background-color: orangered;
   border-radius: 5px;
   box-shadow: 3px 3px;
 }
 
-.ball{
+.ball {
   position: absolute;
   background-color: blue;
 }
 
-.brick{
+.brick {
   position: absolute;
   background: wheat;
   border-radius: 5px;
   margin: 2px;
+}
+
+.scoreCard {
+  display: flex;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.score {
+  padding: 20px;
+  text-align: center;
 }
