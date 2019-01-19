@@ -96,9 +96,15 @@ const drawBrick = function(brick) {
   }
 };
 
+const displayScore = function(score) {
+  const scoreCard = document.getElementById('score');
+  scoreCard.innerText = score;
+};
+
 const moveBall = function(game) {
   game.updateState();
   drawBall(game.ball);
+  displayScore(game.score());
 };
 
 const createGame = function(game) {

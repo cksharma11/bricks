@@ -6,6 +6,10 @@ class Game {
     this.brick = brick;
   }
 
+  score() {
+    return this.brick.collideCount;
+  }
+
   checkCollision() {
     let velocity = this.paddle.manageCollisionWith(
       this.ball,

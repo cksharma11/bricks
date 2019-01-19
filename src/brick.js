@@ -5,6 +5,11 @@ class Brick {
     this.positionX = positionX;
     this.positionY = positionY;
     this.brickStore = [];
+    this.collideCount = 0;
+  }
+
+  increaseCollideCount() {
+    this.collideCount += 1;
   }
 
   storeBricks(brick) {
@@ -30,6 +35,7 @@ class Brick {
       if (!this.doesCollideWith(brick, ball)) return false;
       document.getElementById(brick.ID).remove();
       delete this.brickStore[brick.ID];
+      this.increaseCollideCount();
       return true;
     });
     if (doesCollide) newVelocity.negateY();
